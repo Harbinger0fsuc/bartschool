@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  /* Define your font families using CSS variables */
+  --font-poppins: "Poppins", system-ui, sans-serif;
+  --font-inter: "Inter", system-ui, sans-serif;
+}
+
+body {
+    @apply font-poppins font-normal;
+}
+
+.single-post p {
+  @apply mb-4;
+}
+
+.single-post ul {
+  @apply list-disc list-inside;
+}
+
+.single-post ul li {
+  @apply mb-2
+}
+
+.single-post strong {
+  @apply font-bold;
+}
