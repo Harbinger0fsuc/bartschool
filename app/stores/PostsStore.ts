@@ -92,16 +92,19 @@ export const usePostsStore = defineStore("postsStore", () => {
     }
 
     singlePost.value = data;
+    singlePostLoading.value = false;
   };
 
   return {
     searchQuery,
     posts,
+    loading,
     fetchPosts,
     totalPages,
     setPage,
     page,
     singlePost,
     getSinglePost,
+    singlePostLoading,
   };
 });

@@ -1,18 +1,21 @@
 <template>
     <section class="py-15 single-post">
         <div class="container mx-auto px-4">
-            <div class="mb-10">
-                <NuxtLink :to="{ path: '/blog', query: { page: 1 } }" class="underline">News
-                    & blog</NuxtLink> / <span v-if="singlePost?.title">{{ singlePost.title
-                    }}</span>
+            <div v-if="singlePostLoading" class="mb-4 text-3xl">The post is loading</div>
+            <div v-else>
+                <div class="mb-10">
+                    <NuxtLink :to="{ path: '/blog', query: { page: 1 } }" class="underline">News
+                        & blog</NuxtLink> / <span v-if="singlePost?.title">{{ singlePost.title
+                        }}</span>
+                </div>
+
+                <NuxtImg v-if="singlePost?.featuredImage" :src="singlePost?.featuredImage"
+                    class="block w-[60%] aspect-video mx-auto mb-6" />
+
+                <h1 class="font-bold text-4xl lg:text-6xl text-center mb-6">{{ singlePost?.title }}</h1>
+
+                <div v-html="singlePost?.description"></div>
             </div>
-
-            <NuxtImg v-if="singlePost?.featuredImage" :src="singlePost?.featuredImage"
-                class="block w-[60%] aspect-video mx-auto mb-6" />
-
-            <h1 class="font-bold text-4xl lg:text-6xl text-center mb-6">{{ singlePost?.title }}</h1>
-
-            <div v-html="singlePost?.description"></div>
         </div>
     </section>
 </template>
@@ -23,7 +26,7 @@ import { useRoute } from 'vue-router';
 import { usePostsStore } from '~/stores/PostsStore';
 
 const postsStore = usePostsStore();
-const { singlePost, page, searchQuery } = storeToRefs(postsStore);
+const { singlePost, page, searchQuery, singlePostLoading } = storeToRefs(postsStore);
 const { getSinglePost } = postsStore;
 
 const route = useRoute();
